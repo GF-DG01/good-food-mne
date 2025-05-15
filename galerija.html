@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-sr="Galerija - GOOD FOOD" data-en="Gallery - GOOD FOOD">Galerija - GOOD FOOD</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+     <link rel="icon" type="image/x-icon" href="logo1.png">
+    <style>
+        /* Osiguravanje da futer bude na dnu stranice */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        .footer {
+            flex-shrink: 0;
+        }
+
+        /* Prilagođavanje navigacionog bara */
+        .navbar {
+            background-color: #f28c38;
+            transition: transform 0.3s ease;
+        }
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand img {
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 11px;
+        }
+        .navbar-brand span {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #e63946 !important;
+        }
+
+        /* Prilagođavanje hamburger ikone */
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+            outline: none;
+        }
+        .navbar-toggler-icon {
+            background-image: none;
+            width: 30px;
+            height: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after,
+        .navbar-toggler-icon span {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: #e63946;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-toggler-icon::before {
+            top: 5px;
+        }
+        .navbar-toggler-icon span {
+            top: 13px;
+        }
+        .navbar-toggler-icon::after {
+            top: 21px;
+        }
+
+        /* Prilagođavanje futera */
+        .footer {
+            background-color: #e63946;
+            color: #ffffff;
+            padding: 40px 0;
+        }
+        .footer h5 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #ffb07c;
+        }
+        .footer .follow-us {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .footer .follow-us h5 {
+            margin-left: 30px;
+        }
+        .footer .social-icons {
+            margin-left: 30px;
+        }
+        .footer .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        .footer .contact-info p {
+            margin-bottom: 5px;
+        }
+        .footer .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Language switcher styles */
+        .language-switcher {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 10px 20px;
+            position: fixed;
+            top: 85px;
+            right: 0;
+            z-index: 999;
+        }
+        .language-flag {
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            border: 2px solid #f28c38;
+            border-radius: 3px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .language-flag:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+        .language-flag.active {
+            border-color: #e63946;
+            opacity: 1;
+        }
+
+        /* Responsive prilagođavanja za mobilne i tablet uređaje */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+                padding: 10px 0;
+            }
+            .navbar-nav .nav-item {
+                margin: 5px 0;
+            }
+            .navbar-collapse {
+                background-color: #f28c38;
+                padding: 10px;
+                border-radius: 5px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .footer .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .footer .row {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .footer .row > div {
+                max-width: 90%;
+                width: 300px;
+                margin-bottom: 20px;
+            }
+            .footer h5 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            .footer ul.list-unstyled li {
+                margin-bottom: 5px;
+                font-size: 1rem;
+            }
+            .footer .follow-us {
+                align-items: center;
+            }
+            .footer .follow-us h5 {
+                margin-left: 0;
+            }
+            .footer .social-icons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-left: 0;
+            }
+            .footer .social-icons a {
+                font-size: 1.4rem;
+            }
+            .footer .contact-info p {
+                font-size: 1rem;
+            }
+            .footer .copyright {
+                font-size: 0.9rem;
+            }
+            .language-switcher {
+                top: 75px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand img {
+                height: 30px;
+                max-width: 100%;
+            }
+            .navbar-brand span {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+            .footer {
+                padding: 20px 0;
+            }
+            .footer .row > div {
+                width: 250px;
+                margin-bottom: 15px;
+            }
+            .footer h5 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+            .footer ul.list-unstyled li {
+                margin-bottom: 4px;
+                font-size: 0.95rem;
+            }
+            .footer .social-icons {
+                gap: 8px;
+            }
+            .footer .social-icons a {
+                font-size: 1.3rem;
+            }
+            .footer .contact-info p {
+                font-size: 0.95rem;
+            }
+            .footer .copyright {
+                font-size: 0.85rem;
+            }
+            .language-switcher {
+                top: 65px;
+                padding: 6px 10px;
+            }
+            .language-flag {
+                width: 25px;
+                height: 15px;
+            }
+        }
+
+        /* galerija */
+        /* Stilizacija galerije */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Stilizacija modala */
+        .modal-content {
+            border-radius: 10px;
+            border: 2px solid #f28c38;
+        }
+        .modal-header {
+            background-color: #f28c38;
+            color: #ffffff;
+        }
+        .modal-title {
+            font-weight: 600;
+        }
+        .modal-body img {
+            max-height: 60vh;
+            width: auto;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+        .modal-footer .btn-primary {
+            background-color: #f28c38;
+            border: none;
+        }
+        .modal-footer .btn-primary:hover {
+            background-color: #e63946;
+        }
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .modal-footer .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Responsive prilagođavanja za galeriju */
+        @media (max-width: 991px) {
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .gallery-item img {
+                height: 180px;
+            }
+            .gallery {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .gallery .col-md-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-item img {
+                height: 150px;
+            }
+            .gallery .col-sm-12 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            .modal-body img {
+                max-height: 50vh;
+            }
+        }
+
+        /* Stilizacija dugmeta za povratak na vrh */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f28c38; /* Narandžasta pozadina */
+    color: #ffffff;
+    width: 50px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% 50% 60% 60% / 40% 40% 60% 60%; /* Jajoliki oblik */
+    box-shadow: 0 0 10px rgba(242, 140, 56, 0.5); /* Pulsirajuća senka */
+    animation: pulse-shadow-btn 2s ease-in-out infinite;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #e63946; /* Crvena na hover */
+    box-shadow: 0 0 15px rgba(242, 140, 56, 0.7); /* Jača senka */
+    animation-play-state: paused;
+}
+
+.back-to-top i {
+    font-size: 1.5rem; /* Veličina strelice */
+}
+
+/* Pulsirajuća senka za dugme */
+@keyframes pulse-shadow-btn {
+    0%, 100% { box-shadow: 0 0 10px rgba(242, 140, 56, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(242, 140, 56, 0.7); }
+}
+
+/* Responsivna prilagođavanja */
+@media (max-width: 767px) {
+    .back-to-top {
+        width: 40px;
+        height: 60px;
+        bottom: 15px;
+        right: 15px;
+    }
+    .back-to-top i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .back-to-top {
+        width: 35px;
+        height: 50px;
+        bottom: 10px;
+        right: 10px;
+    }
+    .back-to-top i {
+        font-size: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigacioni bar -->
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Navigacija">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo1.png" alt="goodfood-mne Logo" />
+                <span data-sr="GOOD FOOD" data-en="GOOD FOOD">GOOD FOOD</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Otvori navigacioni meni">
+                <span class="navbar-toggler-icon"><span></span></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" data-sr="Početna" data-en="Home">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="o-nama.html" data-sr="O nama" data-en="About Us">O nama</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="proizvodi.html" data-sr="Proizvodi" data-en="Products">Proizvodi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="usluge.html" data-sr="Usluge" data-en="Services">Usluge</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galerija.html" data-sr="Galerija" data-en="Gallery">Galerija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakti.html" data-sr="Kontakti" data-en="Contacts">Kontakti</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="language-switcher">
+        <img src="srpski.png" alt="Srpski" class="language-flag active" data-lang="sr">
+        <img src="engleski.png" alt="English" class="language-flag" data-lang="en">
+    </div>
+
+    <!-- Sadržaj stranice -->
+   <main class="container my-5">
+    <h2 class="text-center mb-4" style="color: #e63946; font-weight: 600;" data-sr="Galerija" data-en="Gallery">Galerija</h2>
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="korpa-jaja.jpg" alt="Korpa jaja" data-sr-alt="Korpa jaja" data-en-alt="Basket of eggs" class="img-fluid rounded shadow-sm" data-index="1" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="nagrada.jpg" alt="Nagrada GOODFOOD" data-sr-alt="Nagrada GOODFOOD" data-en-alt="GOODFOOD Award" class="img-fluid rounded shadow-sm" data-index="2" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="kombi.jpg" alt="GOODFOOD Kombi" data-sr-alt="GOODFOOD Kombi" data-en-alt="GOODFOOD Van" class="img-fluid rounded shadow-sm" data-index="3" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="pogon.jpg" alt="GOODFOOD Pogon" data-sr-alt="GOODFOOD Pogon" data-en-alt="GOODFOOD Facility" class="img-fluid rounded shadow-sm" data-index="4" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="d1.png" alt="GOODFOOD Proizvodnja" data-sr-alt="GOODFOOD Proizvodnja" data-en-alt="GOODFOOD Production" class="img-fluid rounded shadow-sm" data-index="5" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="pilici1.jpg" alt="Pilici u objektu" data-sr-alt="Pilici u objektu" data-en-alt="Chickens in facility" class="img-fluid rounded shadow-sm" data-index="6" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="d3.jpg" alt="GOODFOOD Proizvod" data-sr-alt="GOODFOOD Proizvod" data-en-alt="GOODFOOD Product" class="img-fluid rounded shadow-sm" data-index="7" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="jaja2.jpg" alt="Jaja u pakovanju" data-sr-alt="Jaja u pakovanju" data-en-alt="Eggs in packaging" class="img-fluid rounded shadow-sm" data-index="8" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="jaja3.jpg" alt="Jaja na farmi" data-sr-alt="Jaja na farmi" data-en-alt="Eggs at farm" class="img-fluid rounded shadow-sm" data-index="9" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="jaja4.jpg" alt="GOODFOOD Jaja" data-sr-alt="GOODFOOD Jaja" data-en-alt="GOODFOOD Eggs" class="img-fluid rounded shadow-sm" data-index="10" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="pilici2.jpg" alt="Pilici na farmi" data-sr-alt="Pilici na farmi" data-en-alt="Chickens at farm" class="img-fluid rounded shadow-sm" data-index="11" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="jaja5.jpg" alt="Jaja u korpi" data-sr-alt="Jaja u korpi" data-en-alt="Eggs in basket" class="img-fluid rounded shadow-sm" data-index="12" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="pilici4.jpg" alt="GOODFOOD Pilici" data-sr-alt="GOODFOOD Pilici" data-en-alt="GOODFOOD Chickens" class="img-fluid rounded shadow-sm" data-index="13" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="pilici5.jpg" alt="Farma pilica" data-sr-alt="Farma pilica" data-en-alt="Chicken farm" class="img-fluid rounded shadow-sm" data-index="14" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="jaja6.jpg" alt="Zemljani radovi" data-sr-alt="Zemljani radovi" data-en-alt="Earthworks" class="img-fluid rounded shadow-sm" data-index="15" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radov1.jpg" alt="Betonski radovi" data-sr-alt="Betonski radovi" data-en-alt="Concrete Works" class="img-fluid rounded shadow-sm" data-index="16" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radovi2.jpg" alt="Zidarski radovi" data-sr-alt="Zidarski radovi" data-en-alt="Masonry Works" class="img-fluid rounded shadow-sm" data-index="17" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radovi6.jpg" alt="Tesarski radovi" data-sr-alt="Tesarski radovi" data-en-alt="Carpentry Works" class="img-fluid rounded shadow-sm" data-index="18" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radovi3.jpg" alt="Good Food" data-sr-alt="Good Food" data-en-alt="Good Food" class="img-fluid rounded shadow-sm" data-index="19" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radovi4.jpg" alt="Good Food" data-sr-alt="Good Food" data-en-alt="Good Food" class="img-fluid rounded shadow-sm" data-index="20" loading="lazy">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="gallery-item">
+                <img src="radovi5.jpg" alt="Good Food" data-sr-alt="Good Food" data-en-alt="Good Food" class="img-fluid rounded shadow-sm" data-index="21" loading="lazy">
+            </div>
+        </div>
+    </div>
+<!-- Dugme za povratak na vrh -->
+<button class="back-to-top" aria-label="Povratak na vrh stranice" title="Povratak na vrh">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+        <!-- Modal za uveličavanje slika -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel" data-sr="GOODFOOD Galerija" data-en="GOODFOOD Gallery">GOODFOOD Galerija</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori" data-sr-aria-label="Zatvori" data-en-aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="" class="img-fluid rounded" id="modalImage" alt="Uveličana slika">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="prevImage" data-sr="<i class='bi bi-arrow-left'></i> Prethodna" data-en="<i class='bi bi-arrow-right'></i> Previous"><i class="bi bi-arrow-left"></i> Prethodna</button>
+                        <button type="button" class="btn btn-primary" id="nextImage" data-sr="Sljedeća <i class='bi bi-arrow-right'></i>" data-en="Next <i class='bi bi-arrow-right'></i>">Sljedeća <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Futer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Navigacija -->
+                <div class="col-md-4 mb-4">
+                    <h5 data-sr="Navigacija" data-en="Navigation">Navigacija</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" data-sr="Početna" data-en="Home">Početna</a></li>
+                        <li><a href="o-nama.html" data-sr="O nama" data-en="About Us">O nama</a></li>
+                        <li><a href="proizvodi.html" data-sr="Proizvodi" data-en="Products">Proizvodi</a></li>
+                        <li><a href="usluge.html" data-sr="Usluge" data-en="Services">Usluge</a></li>
+                        <li><a href="galerija.html" data-sr="Galerija" data-en="Gallery">Galerija</a></li>
+                        <li><a href="kontakti.html" data-sr="Kontakti" data-en="Contacts">Kontakti</a></li>
+                    </ul>
+                </div>
+                <!-- Kontakt -->
+                <div class="col-md-4 mb-4">
+                    <h5 data-sr="Kontakt" data-en="Contact">Kontakt</h5>
+                    <div class="contact-info">
+                        <p data-sr="+382 69 181 829" data-en="+382 69 181 829">+382 69 181 829</p>
+                        <p><a href="mailto:info@goodfood-mne.com" data-sr="info@goodfood-mne.com" data-en="info@goodfood-mne.com">info@goodfood-mne.com</a></p>
+                        <div data-sr="Kosić bb, Danilovgrad, Crna Gora" data-en="Kosić St., Danilovgrad, Montenegro">Kosić bb, Danilovgrad, Crna Gora</div>
+                    </div>
+                </div>
+                <!-- Pratite nas -->
+                <div class="col-md-4 mb-4 follow-us">
+                    <h5 data-sr="Pratite nas" data-en="Follow Us">Pratite nas</h5>
+                    <div class="social-icons">
+                        <a href="tel:+38269316317" target="_blank" aria-label="Viber"><i class="bi bi-telephone-fill"></i></a>
+                        <a href="https://www.instagram.com/construction_mne?utm_source=qr&igsh=ZXY1em83cnU5bnQy" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="copyright" data-sr="© 2025 <a href='https://cryptogorac.com' target='_blank'>cryptogorac.com</a> | Sva prava zadržana." data-en="© 2025 <a href='https://cryptogorac.com' target='_blank'>cryptogorac.com</a> | All rights reserved.">© 2025 <a href="https://cryptogorac.com" target="_blank">cryptogorac.com</a> | Sva prava zadržana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS i Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- JavaScript za skrivanje navigacionog bara, promjenu jezika i galeriju -->
+    <script>
+        // Navbar scroll behavior
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        const navbarBrand = document.querySelector('.navbar-brand');
+
+        navbarBrand.addEventListener('click', function(event) {
+            console.log('Logo clicked! Redirecting to /index.html');
+        });
+
+        window.addEventListener('scroll', function() {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollTop > lastScrollTop) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        });
+
+        // Language switcher
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageFlags = document.querySelectorAll('.language-flag');
+            const elements = document.querySelectorAll('[data-sr][data-en]');
+            const altElements = document.querySelectorAll('[data-sr-alt][data-en-alt]');
+            const ariaElements = document.querySelectorAll('[data-sr-aria-label][data-en-aria-label]');
+            const modalTitle = document.getElementById('imageModalLabel');
+            const prevButton = document.getElementById('prevImage');
+            const nextButton = document.getElementById('nextImage');
+
+            function updateLanguage(lang) {
+                elements.forEach(element => {
+                    let text = lang === 'en' ? element.getAttribute('data-en') : element.getAttribute('data-sr');
+                    element.innerHTML = text;
+                });
+
+                altElements.forEach(element => {
+                    element.alt = lang === 'en' ? element.getAttribute('data-en-alt') : element.getAttribute('data-sr-alt');
+                });
+
+                ariaElements.forEach(element => {
+                    element.setAttribute('aria-label', lang === 'en' ? element.getAttribute('data-en-aria-label') : element.getAttribute('data-sr-aria-label'));
+                });
+
+                document.documentElement.lang = lang;
+                document.title = lang === 'en' ? document.querySelector('title').getAttribute('data-en') : document.querySelector('title').getAttribute('data-sr');
+
+                languageFlags.forEach(flag => {
+                    flag.classList.remove('active');
+                    if (flag.getAttribute('data-lang') === lang) {
+                        flag.classList.add('active');
+                    }
+                });
+
+                localStorage.setItem('selectedLanguage', lang);
+            }
+
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'sr';
+            updateLanguage(savedLanguage);
+
+            languageFlags.forEach(flag => {
+                flag.addEventListener('click', () => {
+                    const lang = flag.getAttribute('data-lang');
+                    updateLanguage(lang);
+                });
+            });
+
+            // Galerija funkcionalnost
+            const galleryImages = document.querySelectorAll('.gallery-item img');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            let currentImageIndex = 0;
+
+            // Otvaranje modala kada se klikne na sliku
+            galleryImages.forEach((img) => {
+                img.addEventListener('click', () => {
+                    currentImageIndex = parseInt(img.getAttribute('data-index')) - 1;
+                    updateModalImage();
+                    const bsModal = new bootstrap.Modal(modal);
+                    bsModal.show();
+                });
+            });
+
+            // Ažuriranje slike u modalu
+            function updateModalImage() {
+                modalImage.src = galleryImages[currentImageIndex].src;
+                modalImage.alt = galleryImages[currentImageIndex].alt;
+            }
+
+            // Prethodna slika
+            prevButton.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateModalImage();
+            });
+
+            // Sljedeća slika
+            nextButton.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateModalImage();
+            });
+
+            // Podrška za tastaturu (strelica lijevo/desno, Escape)
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('show')) {
+                    if (e.key === 'ArrowLeft') {
+                        prevButton.click();
+                    } else if (e.key === 'ArrowRight') {
+                        nextButton.click();
+                    } else if (e.key === 'Escape') {
+                        bootstrap.Modal.getInstance(modal).hide();
+                    }
+                }
+            });
+        });
+
+// Prikazivanje/sakrivanje dugmeta za povratak na vrh
+window.addEventListener('scroll', function() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.pageYOffset > 100) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+});
+
+// Glatko skrolovanje na vrh
+document.querySelector('.back-to-top').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+    </script>
+</body>
+</html>
