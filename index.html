@@ -1593,29 +1593,30 @@
                 </div>
             </div>
             <!-- Kontakt forma -->
-            <div class="col-lg-6 col-md-12">
-                <div class="card contact-form h-100 shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <h3 class="card-title mb-4" data-sr="Pošaljite nam poruku" data-en="Send Us a Message">Pošaljite nam poruku</h3>
-                        <form action="https://api.web3forms.com/submit" method="POST">
-                            <input type="hidden" name="access_key" value="231d7998-e00a-4d0b-beff-313ad7a09733">
-                            <div class="mb-3">
-                                <label for="name" class="form-label" data-sr="Ime i prezime" data-en="Full Name">Ime i prezime</label>
-                                <input type="text" class="form-control" id="name" placeholder="Unesite vaše ime" data-sr-placeholder="Unesite vaše ime" data-en-placeholder="Enter your name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label" data-sr="Email adresa" data-en="Email Address">Email adresa</label>
-                                <input type="email" class="form-control" id="email" placeholder="Unesite vaš email" data-sr-placeholder="Unesite vaš email" data-en-placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label" data-sr="Poruka" data-en="Message">Poruka</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Unesite vašu poruku" data-sr-placeholder="Unesite vašu poruku" data-en-placeholder="Enter your message" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100" data-sr="Pošalji" data-en="Send">Pošalji</button>
-                        </form>
-                    </div>
+          <div class="col-lg-6 col-md-12">
+    <div class="card contact-form h-100 shadow-sm border-0">
+        <div class="card-body p-4">
+            <h3 class="card-title mb-4" data-sr="Pošaljite nam poruku" data-en="Send Us a Message">Pošaljite nam poruku</h3>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <!-- Replace with your Access Key -->
+                <input type="hidden" name="access_key" value="231d7998-e00a-4d0b-beff-313ad7a09733">
+                <div class="mb-3">
+                    <label for="name" class="form-label" data-sr="Ime i prezime" data-en="Full Name">Ime i prezime</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Unesite vaše ime" data-sr-placeholder="Unesite vaše ime" data-en-placeholder="Enter your name" required>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label" data-sr="Email adresa" data-en="Email Address">Email adresa</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Unesite vaš email" data-sr-placeholder="Unesite vaš email" data-en-placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label" data-sr="Poruka" data-en="Message">Poruka</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Unesite vašu poruku" data-sr-placeholder="Unesite vašu poruku" data-en-placeholder="Enter your message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" data-sr="Pošalji" data-en="Send">Pošalji</button>
+            </form>
+        </div>
+    </div>
+</div>
             <!-- Google Mapa -->
          <div class="col-12">
     <div class="card map-container shadow-sm border-0">
